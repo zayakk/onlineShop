@@ -142,12 +142,12 @@
     }
 
     .menu-bar {
-    background: #ff69b4;
-    padding: 10px;
-    text-align: left;
-    display: flex; /* Use flexbox to align items in a row */
-    justify-content: center; /* Center the menu items */
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        background: #ff69b4;
+        padding: 10px;
+        text-align: left;
+        display: flex; /* Use flexbox to align items in a row */
+        justify-content: center; /* Center the menu items */
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
     }
 
     .menu-bar a {
@@ -181,7 +181,6 @@
         }
     }
 
-
     .card-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
@@ -189,8 +188,8 @@
 
     .card img {
         height: 300px;
-        }
     }
+}
 
 @media (max-width: 480px) {
     .card-container {
@@ -199,7 +198,7 @@
     }
 
     .card img {
-        height: 250px;
+        height: 150px;
     }
 
     .pagination a {
@@ -213,6 +212,51 @@
         margin: 0 5px;
     }
 }
+
+        .cart-icon {
+            position: absolute;
+            top: 70px;
+            right: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .cart-items {
+            position: absolute;
+            top: 75px;
+            right: 70px;
+            font-size: 16px;
+            color: white;
+            background: #ff69b4;
+            padding: 5px 10px;
+            border-radius: 50%;
+        }
+
+        /* Cart dropdown */
+        .cart-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
+            padding: 10px;
+            width: 300px;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-dropdown a {
+            text-decoration: none;
+            color: #ff69b4;
+        }
+
+        .cart-dropdown .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -236,45 +280,57 @@
         <a href="#">Contact</a>
         <a href="#">Sale</a>
     </div>
-    
+
+    <!-- Cart icon and items count -->
+    <div class="cart-icon" onclick="toggleCart()">
+        🛒
+    </div>
+    <div class="cart-items" id="cart-count">0</div>
+
+    <!-- Cart dropdown -->
+    <div class="cart-dropdown" id="cart-dropdown">
+        <h3>Your Cart</h3>
+        <div id="cart-container"></div>
+        <a href="#" id="checkout-button" style="display: none;">Proceed to Checkout</a>
+    </div>
+
     <div class="content">
         <h2>Shop the Latest Clothes</h2>
         <p>Find the best outfits for any occasion.</p>
         <div class="card-container" id="product-container"></div>
     </div>
-    
+
     <div class="pagination">
         <a href="#" id="prev-button" onclick="changePage(-1)">&laquo; Prev</a>
         <a href="#" id="page1" onclick="setPage(1)">1</a>
         <a href="#" id="page2" onclick="setPage(2)">2</a>
         <a href="#" id="next-button" onclick="changePage(1)">Next &raquo;</a>
     </div>
-    
-    
+
     <div class="bottom-nav">
-        <p>&copy; 2025 Online Shop |</p>
+        <p> Online Shop </p>
     </div>
 
     <script>
         const products = [
-            { img: "https://i.pinimg.com/originals/39/e9/f2/39e9f296aee0459bc17a5bdecb0e7230.jpg", name: "Trendy Outfit", price: "$49.99" },
-            { img: "https://i.pinimg.com/736x/b9/bc/ea/b9bceaf0ae06fbaf399aa7d7989c27b0.jpg", name: "Casual Wear", price: "$39.99" },
-            { img: "https://i.pinimg.com/736x/4f/a0/c3/4fa0c395efd7db0a3eac7792d348e002.jpg", name: "Summer Dress", price: "$29.99" },
-            { img: "https://i.pinimg.com/736x/15/c1/d9/15c1d98ab9389d98b264c98974b4d820.jpg", name: "Trendy Outfit", price: "$49.99" },
-            { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Wear", price: "$39.99" },
-            { img: "https://i.pinimg.com/736x/ba/86/7b/ba867b94aa8438d30d934173fd0ba194.jpg", name: "Casual Man Wear", price: "$39.99" },
-            { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Man Wear", price: "$39.99" },
-            // Add more products if needed
+            { img: "https://i.pinimg.com/originals/39/e9/f2/39e9f296aee0459bc17a5bdecb0e7230.jpg", name: "Trendy Outfit", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/b9/bc/ea/b9bceaf0ae06fbaf399aa7d7989c27b0.jpg", name: "Casual Wear", price: "$150.000₮" },
+            { img: "https://i.pinimg.com/736x/4f/a0/c3/4fa0c395efd7db0a3eac7792d348e002.jpg", name: "Summer Dress", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/15/c1/d9/15c1d98ab9389d98b264c98974b4d820.jpg", name: "Trendy Outfit", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Wear", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/ba/86/7b/ba867b94aa8438d30d934173fd0ba194.jpg", name: "Casual Man Wear", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Man Wear", price: "150.000₮" },
         ];
 
         let currentPage = 1;
-        const itemsPerPage = 5; // Number of products per page
+        const itemsPerPage = 5;
+        let cart = [];
 
         // Set page number
         function setPage(page) {
-            if (page < 1) return; // Prevent going to negative pages
+            if (page < 1) return;
             const totalPages = Math.ceil(products.length / itemsPerPage);
-            if (page > totalPages) return; // Prevent going past the last page
+            if (page > totalPages) return;
             currentPage = page;
             renderProducts();
             updatePagination();
@@ -287,8 +343,60 @@
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             products.slice(start, end).forEach(product => {
-                container.innerHTML += `<div class='card'><img src='${product.img}' alt='${product.name}'><p>${product.name}</p><p class='price'>${product.price}</p></div>`;
+                container.innerHTML += `<div class='card'>
+                    <img src='${product.img}' alt='${product.name}'>
+                    <p>${product.name}</p>
+                    <p class='price'>${product.price}</p>
+                    <button style=color.pink onclick="addToCart('${product.name}', '${product.price}', '${product.img}')"> Сагсанд хийх </button>
+                </div>`;
             });
+        }
+
+        // Add product to cart
+function addToCart(name, price, img) {
+    cart.push({ name, price, img });
+    updateCart();
+}
+
+// Remove product from cart
+function removeFromCart(index) {
+    cart.splice(index, 1); // Remove the item at the specified index
+    updateCart(); // Update the cart UI after removal
+}
+
+// Update cart UI and item count
+function updateCart() {
+    const cartCount = document.getElementById("cart-count");
+    cartCount.innerHTML = cart.length;
+
+    const cartContainer = document.getElementById("cart-container");
+    cartContainer.innerHTML = ""; // Clear the cart container before updating
+
+    // Loop through each item in the cart and display it with a remove button
+    cart.forEach((item, index) => {
+        cartContainer.innerHTML += `
+            <div class="cart-item">
+                <img src="${item.img}" alt="${item.name}" width="40" height="40">
+                <p>${item.name} - ${item.price}</p>
+                <button onclick="removeFromCart(${index})" style="color: pink;">Remove</button>
+            </div>
+        `;
+    });
+
+    // Show checkout button if there are items in the cart
+    const checkoutButton = document.getElementById("checkout-button");
+    if (cart.length > 0) {
+        checkoutButton.style.display = "block";
+    } else {
+        checkoutButton.style.display = "none";
+    }
+}
+
+
+        // Toggle cart dropdown visibility
+        function toggleCart() {
+            const cartDropdown = document.getElementById("cart-dropdown");
+            cartDropdown.style.display = cartDropdown.style.display === "block" ? "none" : "block";
         }
 
         // Update pagination links
@@ -300,7 +408,6 @@
             const prevButton = document.getElementById("prev-button");
             const nextButton = document.getElementById("next-button");
 
-            // Show or hide the 'Prev' and 'Next' buttons
             prevButton.style.visibility = currentPage === 1 ? "hidden" : "visible";
             nextButton.style.visibility = currentPage === totalPages ? "hidden" : "visible";
         }
@@ -313,7 +420,6 @@
         // Initial rendering
         renderProducts();
         updatePagination();
-
     </script>
 </body>
 </html>
