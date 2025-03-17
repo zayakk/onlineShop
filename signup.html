@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupForm()">&times;</span>
+            <h2>Бүртгэл</h2>
+            <form id="signup-form">
+                <label for="signup-username">Хэрэглэгчийн нэр:</label>
+                <input type="text" id="signup-username" placeholder="Хэрэглэгчийн нэр" required>
+                <label for="signup-email">Имэйл хаяг:</label>
+                <input type="email" id="signup-email" placeholder="Имэйл хаяг" required>
+                <label for="signup-password">Нууц үг:</label>
+                <input type="password" id="signup-password" placeholder="Нууц үг" required>
+                <button type="submit" onclick="signupUser(event)">Бүртгүүлэх</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

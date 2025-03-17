@@ -1,10 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    background: #ffe4e1;
-    color: #d63384;
+    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    color: #333;
 }
 
 .top-bar {
@@ -12,11 +8,12 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background: #ffb6c1;
+    background: linear-gradient(90deg, #ff9a9e, #fad0c4);
     color: white;
 }
 
 .search-bar {
+    border: 2px solid #d291bc;
     flex: 1;
     margin: 0 35px;
 }
@@ -29,7 +26,7 @@ body {
 }
 
 .menu-bar {
-    background: #ff69b4;
+    background: linear-gradient(90deg, #ff758c, #ff7eb3);
     padding: 10px;
     text-align: left;
 }
@@ -78,11 +75,11 @@ body {
 
 /* Card Styles */
 .card {
-    background: white;
+    background-color: #b3e5fc; /* Зөөлөн цэнхэр */
+    color: #6a11cb; /* Ягаан */
+    padding: 20px;
     border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card img {
@@ -257,3 +254,58 @@ body {
             font-weight: bold;
         }
         
+
+/* //login */
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* input {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+} */
+
+button:hover {
+    background-color: #b500ec;
+}
+
+/* login */
