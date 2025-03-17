@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -87,78 +88,233 @@
             { img: "https://i.pinimg.com/736x/ba/86/7b/ba867b94aa8438d30d934173fd0ba194.jpg", name: "Casual Man Wear", price: "150.000₮" },
             { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Man Wear", price: "150.000₮" },
         ];
+=======
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн Дэлгүүр</title>
+    <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">ЛОГО</div>
+        <div class="search-bar"><input type="text" placeholder="Хайх..."></div>
+        <div class="login"><a href="#" style="color: white;">Нэвтрэх</a></div>
+    </div>
+    
+    <div class="menu-bar">
+        <div class="dropdown">
+            <a href="#" onclick="changeCategory('all')">Төрөл</a>
+            <div class="dropdown-content">
+                <a href="#" onclick="changeCategory('men')">Эрэгтэй</a>
+                <a href="#" onclick="changeCategory('women')">Эмэгтэй</a>
+                <a href="#" onclick="changeCategory('kids')">Хүүхдүүд</a>
+                <a href="#" onclick="changeCategory('accessories')">Аксессуар</a>
+            </div>
+        </div>
+        <a href="#">Шинэ</a>
+        <a href="#">Холбоо барих</a>
+        <a href="#">Хямдрал</a>
+    </div>
+
+    <!-- Сагсны дүрс болон барааны тоо -->
+    <div class="cart-icon" onclick="toggleCart()">
+        🛒
+    </div>
+    <div class="cart-items" id="cart-count">0</div>
+
+    <!-- Сагсны цэс -->
+    <div class="cart-dropdown" id="cart-dropdown">
+        <h3>Таны Сагс</h3>
+        <div id="cart-container"></div>
+        <a href="#" id="checkout-button" style="display: none;">Төлбөр төлөх</a>
+    </div>
+
+    <div class="content">
+        <h2>Шинэ хувцаснуудыг худалдан аваарай</h2>
+        <p>Тухайн өдөр, үеийн хувцаснуудыг олоорой.</p>
+        <div class="card-container" id="product-container"></div>
+    </div>
+
+    <div class="pagination">
+        <a href="#" id="prev-button" onclick="changePage(-1)">&laquo; Өмнөх</a>
+        <a href="#" id="page1" onclick="setPage(1)">1</a>
+        <a href="#" id="page2" onclick="setPage(2)">2</a>
+        <a href="#" id="next-button" onclick="changePage(1)">Дараах &raquo;</a>
+    </div>
+
+    
+
+    <script>
+        const allProducts = {
+            men: [
+                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/dc/25/bd/dc25bd7b899027dd4b6feb182fc64eb6.jpg", name: "Эрэгтэй хувцас 4", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/74/89/f0/7489f0163296b5508f130c52b731ab3e.jpg", name: "Эрэгтэй хувцас 5", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/dc/25/bd/dc25bd7b899027dd4b6feb182fc64eb6.jpg", name: "Эрэгтэй хувцас 4", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/74/89/f0/7489f0163296b5508f130c52b731ab3e.jpg", name: "Эрэгтэй хувцас 5", price: "150.000₮" },
+                
+            ],
+            women: [
+                { img: "https://i.pinimg.com/736x/b9/bc/ea/b9bceaf0ae06fbaf399aa7d7989c27b0.jpg", name: "Эмэгтэй хувцас 1", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/4f/a0/c3/4fa0c395efd7db0a3eac7792d348e002.jpg", name: "Эмэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/15/c1/d9/15c1d98ab9389d98b264c98974b4d820.jpg", name: "Эмэгтэй хувцас 3", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Эмэгтэй хувцас 4", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/ba/86/7b/ba867b94aa8438d30d934173fd0ba194.jpg", name: "Эмэгтэй хувцас 5", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/b9/bc/ea/b9bceaf0ae06fbaf399aa7d7989c27b0.jpg", name: "Эмэгтэй хувцас 1", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/4f/a0/c3/4fa0c395efd7db0a3eac7792d348e002.jpg", name: "Эмэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/15/c1/d9/15c1d98ab9389d98b264c98974b4d820.jpg", name: "Эмэгтэй хувцас 3", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Эмэгтэй хувцас 4", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/ba/86/7b/ba867b94aa8438d30d934173fd0ba194.jpg", name: "Эмэгтэй хувцас 5", price: "150.000₮" },
+            ],
+            kids: [
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/de/da/16/deda16a431327d8b1178baf3282ea0b4.jpg", name: "хүүхэд хувцас 1", price: "150.000₮" },
+            ],
+            acces: [
+            { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/dc/25/bd/dc25bd7b899027dd4b6feb182fc64eb6.jpg", name: "Эрэгтэй хувцас 4", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/74/89/f0/7489f0163296b5508f130c52b731ab3e.jpg", name: "Эрэгтэй хувцас 5", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/dc/25/bd/dc25bd7b899027dd4b6feb182fc64eb6.jpg", name: "Эрэгтэй хувцас 4", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/74/89/f0/7489f0163296b5508f130c52b731ab3e.jpg", name: "Эрэгтэй хувцас 5", price: "150.000₮" },
+            ],
+        };
+>>>>>>> 08da3e6c8bce775e28d8abd8851e724683a2e360
 
         let currentPage = 1;
         const itemsPerPage = 5;
         let cart = [];
+        let currentCategory = 'all'; // Эхлээд бүх барааг үзүүлнэ
 
-        // Set page number
+        // Төрөл сонгох функц
+        function changeCategory(category) {
+            currentCategory = category;
+            setPage(1); // Төрөл сонгогдсоноор 1-р хуудсыг гаргах
+        }
+
+        // Хуудасны дугаарыг тохируулах
         function setPage(page) {
             if (page < 1) return;
-            const totalPages = Math.ceil(products.length / itemsPerPage);
+            const totalPages = Math.ceil(allProducts[currentCategory].length / itemsPerPage);
             if (page > totalPages) return;
             currentPage = page;
             renderProducts();
             updatePagination();
         }
 
-        // Render the products based on the current page
+        // Одоогийн хуудаснаас бүтээгдэхүүнийг үзүүлэх
         function renderProducts() {
-            const container = document.getElementById("product-container");
-            container.innerHTML = "";
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            products.slice(start, end).forEach(product => {
-                container.innerHTML += `<div class='card'>
-                    <img src='${product.img}' alt='${product.name}'>
-                    <p>${product.name}</p>
-                    <p class='price'>${product.price}</p>
-                    <button style=color.pink onclick="addToCart('${product.name}', '${product.price}', '${product.img}')"> Сагсанд хийх </button>
-                </div>`;
-            });
+    const container = document.getElementById("product-container");
+    container.innerHTML = "";
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const products = allProducts[currentCategory].slice(start, end);
+    products.forEach(product => {
+        let priceDisplay = `<p class='price'>${product.price}</p>`; // Эхний үнэ
+        if (product.discountedPrice) { // Хямдралтай бол үнийг өөрчлөх
+            priceDisplay = `
+                <p class='price' style="text-decoration: line-through;">${product.price}</p>
+                <p class='discounted-price'>${product.discountedPrice}</p>
+            `;
+        }
+        container.innerHTML += `<div class='card'>
+            <img src='${product.img}' alt='${product.name}'>
+            <p>${product.name}</p>
+            ${priceDisplay}
+            <button style="color: pink" onclick="addToCart('${product.name}', '${product.discountedPrice || product.price}', '${product.img}')">Сагсанд хийх</button>
+        </div>`;
+    });
+}
+        
+
+        // Сагсанд бүтээгдэхүүн нэмэх
+        function addToCart(name, price, img) {
+            cart.push({ name, price, img });
+            updateCart();
         }
 
-        // Add product to cart
-function addToCart(name, price, img) {
-    cart.push({ name, price, img });
-    updateCart();
-}
+        // Сагсны UI-г шинэчлэх
+        function updateCart() {
+            const cartCount = document.getElementById("cart-count");
+            cartCount.innerHTML = cart.length;
 
-// Remove product from cart
-function removeFromCart(index) {
-    cart.splice(index, 1); // Remove the item at the specified index
-    updateCart(); // Update the cart UI after removal
-}
+            const cartContainer = document.getElementById("cart-container");
+            cartContainer.innerHTML = ""; 
 
-// Update cart UI and item count
-function updateCart() {
-    const cartCount = document.getElementById("cart-count");
-    cartCount.innerHTML = cart.length;
+            cart.forEach((item, index) => {
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.name}" width="40" height="40">
+                        <p>${item.name} - ${item.price}</p>
+                        <button onclick="removeFromCart(${index})" style="color: pink;">Устгах</button>
+                    </div>
+                `;
+            });
 
-    const cartContainer = document.getElementById("cart-container");
-    cartContainer.innerHTML = ""; // Clear the cart container before updating
+            const checkoutButton = document.getElementById("checkout-button");
+            checkoutButton.style.display = cart.length > 0 ? "block" : "none";
+        }
 
-    // Loop through each item in the cart and display it with a remove button
-    cart.forEach((item, index) => {
-        cartContainer.innerHTML += `
-            <div class="cart-item">
-                <img src="${item.img}" alt="${item.name}" width="40" height="40">
-                <p>${item.name} - ${item.price}</p>
-                <button onclick="removeFromCart(${index})" style="color: pink;">Remove</button>
-            </div>
-        `;
+        // Хуудасны дугаарыг шинэчлэх
+        function updatePagination() {
+    const totalPages = Math.ceil(allProducts[currentCategory].length / itemsPerPage);
+    
+    // Хуудасны дугааруудад үзүүлэх
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+
+    prevButton.style.visibility = currentPage === 1 ? "hidden" : "visible";
+    nextButton.style.visibility = currentPage === totalPages ? "hidden" : "visible";
+    
+    // Өмнөх болон дараах хуудсыг тохируулах
+    const pageLinks = document.querySelectorAll('.pagination a');
+    pageLinks.forEach(link => {
+        link.style.display = 'none'; // Бүх хуудаснуудыг нууцлах
     });
 
-    // Show checkout button if there are items in the cart
-    const checkoutButton = document.getElementById("checkout-button");
-    if (cart.length > 0) {
-        checkoutButton.style.display = "block";
-    } else {
-        checkoutButton.style.display = "none";
+    // Хуудаснуудыг харуулах
+    if (currentPage > 1) {
+        document.getElementById("page1").style.display = "inline";
     }
+    if (currentPage < totalPages) {
+        document.getElementById("page2").style.display = "inline";
+    }
+
+    document.getElementById("page1").innerText = currentPage;
+    document.getElementById("page2").innerText = totalPages;
+}
+        
+function changePage(direction) {
+    setPage(currentPage + direction);
 }
 
+// Эхний ачаалал
+renderProducts();
+updatePagination();
 
+<<<<<<< HEAD
         // Toggle cart dropdown visibility
         function toggleCart() {
             const cartDropdown = document.getElementById("cart-dropdown");
@@ -191,5 +347,11 @@ function updateCart() {
 </section>
         </div>
     <!-- </div> -->
+=======
+    </script>
+    <div class="bottom-nav">
+        <p> Онлайн Дэлгүүр </p>
+    </div>
+>>>>>>> 08da3e6c8bce775e28d8abd8851e724683a2e360
 </body>
 </html>
