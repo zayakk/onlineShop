@@ -1,195 +1,598 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title>Online Shop</title>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн Дэлгүүр</title>
+    <link rel="stylesheet" href="mystyle.css">
+    <style>
+        body {
+    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    color: #333;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+    color: white;
+}
+
+.search-bar {
+    border: 2px solid #d291bc;
+    flex: 1;
+    margin: 0 35px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 5px;
+    border: 2px solid #ff69b4;
+    border-radius: 5px;
+}
+
+.menu-bar {
+    background: linear-gradient(90deg, #ff758c, #ff7eb3);
+    padding: 10px;
+    text-align: left;
+}
+
+.menu-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #ff69b4;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.content {
+    padding: 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Card Styles */
+.card {
+    background-color: #b3e5fc; /* Зөөлөн цэнхэр */
+    color: #6a11cb; /* Ягаан */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card p.price {
+    font-weight: bold;
+    color: #ff69b4;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background: #ffb6c1;
+    color: white;
+    padding: 10px 0;
+}
+
+/* Pagination */
+.pagination {
+    margin: 20px 0;
+    position: fixed;
+    bottom: 60px;
+    width: 100%;
+    text-align: center;
+}
+
+.pagination a {
+    color: #ff69b4;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .search-bar {
+        margin: 10px 0;
+    }
+
+    .menu-bar {
+        background: #ff69b4;
+        padding: 10px;
+        text-align: left;
+        display: flex; /* Use flexbox to align items in a row */
+        justify-content: center; /* Center the menu items */
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    }
+
+    .menu-bar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+    }
+
+    @media (max-width: 768px) {
+        .menu-bar {
+            flex-direction: row; /* Ensure the items are in one row */
+            justify-content: center; /* Center the items */
+            padding: 10px 20px;
+        }
+
+        .menu-bar a {
+            margin: 0 8px; /* Reduce margin for smaller screens */
+            font-size: 14px; /* Adjust font size for better readability on small screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .menu-bar {
+            flex-direction: row; /* Ensure the items are in one row */
+            justify-content: center; /* Center the items */
+        }
+
+        .menu-bar a {
+            margin: 0 5px; /* Further reduce margin */
+            font-size: 12px; /* Adjust font size even more for small screens */
+        }
+    }
+
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .card img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .card img {
+        height: 150px;
+    }
+
+    .pagination a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pagination a {
+        font-size: 14px;
+        margin: 0 5px;
+    }
+}
+
+.cart-icon {
+    position: fixed;
+    top: 65px;
+    right: 10px;
+    background: #ff4081;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+        .cart-items {
+            position: absolute;
+            top: 75px;
+            right: 70px;
+            font-size: 16px;
+            color: white;
+            background: #ff69b4;
+            padding: 5px 10px;
+            border-radius: 50%;
+        }
+
+        /* Cart dropdown */
+        .cart-dropdown {
+            position: absolute;
+            top: 100px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #ff69b4;
+            border-radius: 5px;
+            padding: 10px;
+            width: 300px;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-dropdown a {
+            text-decoration: none;
+            color: #ff69b4;
+        }
+
+        .cart-dropdown .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .discounted-price {
+            color: red;
+            font-weight: bold;
+        }
+        
+
+/* //login */
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* input {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+} */
+
+button:hover {
+    background-color: #b500ec;
+}
+
+/* login */
+    </style>
 </head>
 <body>
 
-        <div>
-
-            <header class="top-bar">
-                <div class="logo">
-                    <div class="logo1">
-                        <img src="logo.jpg" alt="logo" width="80" height="50">
-                    </div>
-                    
-                    <div class="search-bar"><input type="text" placeholder="Search...">
-                    </div>
-                    <button 
-                    type="button" style="width:24px;height:24px; float:left; margin-top: 14px;" aria-hidden="true">
-                    </button>
-                    <a class="login"  href="#" style="color: white;">Login </a>
-                </div>
-                    
-                    <div class="menu-bar">
-                        <div class="dropdown">
-                            <a href="#">Category</a>
-                            <div class="dropdown-content">
-                                <a href="#">Men</a>
-                            <a href="#">Women</a>
-                            <a href="#">Kids</a>
-                            <a href="#">Accessories</a>
-                        </div>
-                    </div>
-                    <a href="#">New</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Sale</a>
-                    
-                    
-                    <!-- <!-  Cart icon and items count -->
-                    <div class="cart-icon" onclick="toggleCart()">
-                        🛒
-                    </div>
-                    <div class="cart-items" id="cart-count">0</div>
-                    
-                    <!-- <!- Cart dropdown -->
-                    <div class="cart-dropdown" id="cart-dropdown">
-                        <h3>Your Cart</h3>
-                        <div id="cart-container"></div>
-                        <a href="#" id="checkout-button" style="display: none;">Proceed to Checkout</a>
-                    </div> 
-                    
-                </div>
-            </header>
+    <div class="top-bar">
+        <div class="logo">ЛОГО</div>
+        <div class="search-bar"><input type="text" placeholder="Хайх..."></div>
+        <div class="login">
+            <a href="#" onclick="openLoginForm()" style="color: white;">Нэвтрэх</a>
+            <a href="#" onclick="openSignupForm()" style="color: white;">Бүртгэл</a>
         </div>
-        <div>
-
-            <section>
-                <div class="content">
-                    <h2>Shop the Latest Clothes</h2>
-                    <p>Find the best outfits for any occasion.</p>
-                    <div class="card-container" id="product-container"></div>
-                </div>
-                
-                <div class="pagination">
-        <a href="#" id="prev-button" onclick="changePage(-1)">&laquo; Prev</a>
-        <a href="#" id="page1" onclick="setPage(1)">1</a>
-        <a href="#" id="page2" onclick="setPage(2)">2</a>
-        <a href="#" id="next-button" onclick="changePage(1)">Next &raquo;</a>
-    </div> 
-    
-    <div class="bottom-nav">
-        <p> Online Shop </p>
     </div>
 
+    <div class="menu-bar">
+        <div class="dropdown">
+            <a href="#" onclick="changeCategory('all')">Төрөл</a>
+            <div class="dropdown-content">
+                <a href="#" onclick="changeCategory('men')">Эрэгтэй</a>
+                <a href="#" onclick="changeCategory('women')">Эмэгтэй</a>
+                <a href="#" onclick="changeCategory('kids')">Хүүхдүүд</a>
+                <a href="#" onclick="changeCategory('accessories')">Аксессуар</a>
+            </div>
+        </div>
+        <a href="#">Шинэ</a>
+        <a href="#">Холбоо барих</a>
+        <a href="#">Хямдрал</a>
+    </div>
 
+    <div class="cart-icon" onclick="toggleCart()">
+        🛒
+    </div>
+    <div class="cart-items" id="cart-count">0</div>
 
-<script>
-        const products = [
-            { img: "https://i.pinimg.com/originals/39/e9/f2/39e9f296aee0459bc17a5bdecb0e7230.jpg", name: "Trendy Outfit", price: "150.000₮" },
-            { img: "https://i.pinimg.com/736x/b9/bc/ea/b9bceaf0ae06fbaf399aa7d7989c27b0.jpg", name: "Casual Wear", price: "$150.000₮" },
-            { img: "https://i.pinimg.com/736x/4f/a0/c3/4fa0c395efd7db0a3eac7792d348e002.jpg", name: "Summer Dress", price: "150.000₮" },
-            { img: "https://i.pinimg.com/736x/15/c1/d9/15c1d98ab9389d98b264c98974b4d820.jpg", name: "Trendy Outfit", price: "150.000₮" },
-            { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Wear", price: "150.000₮" },
-            { img: "https://i.pinimg.com/736x/ba/86/7b/ba867b94aa8438d30d934173fd0ba194.jpg", name: "Casual Man Wear", price: "150.000₮" },
-            { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Man Wear", price: "150.000₮" },
-        ];
+    <div class="cart-dropdown" id="cart-dropdown">
+        <h3>Таны Сагс</h3>
+        <div id="cart-container"></div>
+        <a href="#" id="checkout-button" style="display: none;">Төлбөр төлөх</a>
+    </div>
 
+    <div class="content">
+        <h2>Шинэ хувцаснуудыг худалдан аваарай</h2>
+        <p>Тухайн өдөр, үеийн хувцаснуудыг олоорой.</p>
+        <div class="card-container" id="product-container"></div>
+    </div>
+
+    
+
+    <div class="pagination">
+        <a href="#" id="prev-button" onclick="changePage(-1)">&laquo; Өмнөх</a>
+        <a href="#" id="page1" onclick="setPage(1)">1</a>
+        <a href="#" id="page2" onclick="setPage(2)">2</a>
+        <a href="#" id="next-button" onclick="changePage(1)">Дараах &raquo;</a>
+    </div>
+
+    <!-- Нэвтрэх модал -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginForm()">&times;</span>
+            <form onsubmit="loginUser(event)">
+                <input type="text" id="login-username" placeholder="Нэвтрэх нэр">
+                <input type="password" id="login-password" placeholder="Нууц үг">
+                <button type="submit">Нэвтрэх</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Бүртгэл модал -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupForm()">&times;</span>
+            <form onsubmit="signupUser(event)">
+                <input type="text" id="signup-username" placeholder="Нэвтрэх нэр">
+                <input type="email" id="signup-email" placeholder="Цахим шуудан">
+                <input type="password" id="signup-password" placeholder="Нууц үг">
+                <button type="submit">Бүртгүүлэх</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let currentCategory = 'all';
         let currentPage = 1;
         const itemsPerPage = 5;
-        let cart = [];
 
-        // Set page number
+        const allProducts = {
+            men: [
+                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },],
+            women: [
+                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },],
+            kids: [
+                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },],
+            accessories: [
+                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
+                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },],
+        };
+
+        // Бүх барааг автоматаар all ангилалд нэгтгэн хадгалах
+        allProducts.all = [].concat(...Object.values(allProducts));
+
+
+        // Хуудас эхлэхэд бүх барааг харуулах
+        document.addEventListener("DOMContentLoaded", function () {
+            currentCategory = "all";
+            setPage(1);
+        });
+
+
+
+        function changeCategory(category) {
+            currentCategory = category;
+            setPage(1);
+        }
+
         function setPage(page) {
             if (page < 1) return;
-            const totalPages = Math.ceil(products.length / itemsPerPage);
+            const totalPages = Math.ceil(allProducts[currentCategory].length / itemsPerPage);
             if (page > totalPages) return;
             currentPage = page;
             renderProducts();
             updatePagination();
         }
 
-        // Render the products based on the current page
         function renderProducts() {
             const container = document.getElementById("product-container");
             container.innerHTML = "";
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
-            products.slice(start, end).forEach(product => {
+            const products = allProducts[currentCategory].slice(start, end);
+
+            products.forEach(product => {
+                let priceDisplay = `<p class='price'>${product.price}</p>`;
+                if (product.discountedPrice) {
+                    priceDisplay = `
+                        <p class='price' style="text-decoration: line-through;">${product.price}</p>
+                        <p class='discounted-price'>${product.discountedPrice}</p>
+                    `;
+                }
                 container.innerHTML += `<div class='card'>
                     <img src='${product.img}' alt='${product.name}'>
                     <p>${product.name}</p>
-                    <p class='price'>${product.price}</p>
-                    <button style=color.pink onclick="addToCart('${product.name}', '${product.price}', '${product.img}')"> Сагсанд хийх </button>
+                    ${priceDisplay}
+                    <button style="color: pink" onclick="addToCart('${product.name}', '${product.discountedPrice || product.price}', '${product.img}')">Сагсанд хийх</button>
                 </div>`;
             });
         }
 
-        // Add product to cart
-function addToCart(name, price, img) {
-    cart.push({ name, price, img });
-    updateCart();
-}
+        function updatePagination() {
+            const totalPages = Math.ceil(allProducts[currentCategory].length / itemsPerPage);
+            const pagination = document.querySelector(".pagination");
 
-// Remove product from cart
-function removeFromCart(index) {
-    cart.splice(index, 1); // Remove the item at the specified index
-    updateCart(); // Update the cart UI after removal
-}
+            if (totalPages <= 1) {
+                pagination.style.display = "none";
+            } else {
+                pagination.style.display = "block";
+            }
 
-// Update cart UI and item count
-function updateCart() {
+            document.getElementById("prev-button").style.visibility = currentPage === 1 ? "hidden" : "visible";
+            document.getElementById("next-button").style.visibility = currentPage === totalPages ? "hidden" : "visible";
+        }
+
+        function changePage(step) {
+            const totalPages = Math.ceil(allProducts[currentCategory].length / itemsPerPage);
+            let newPage = currentPage + step;
+
+            if (newPage < 1 || newPage > totalPages) return; // Хязгаар шалгах
+
+            currentPage = newPage;
+            renderProducts(); // Бүтээгдэхүүнийг шинэчилж харуулах
+            updatePagination(); // Хуудаслалтыг шинэчлэх
+        }
+
+
+
+        function addToCart(name, price, img) {
+            cart.push({ name, price, img });
+            updateCart();
+        }
+
+        function updateCart() {
     const cartCount = document.getElementById("cart-count");
     cartCount.innerHTML = cart.length;
 
     const cartContainer = document.getElementById("cart-container");
-    cartContainer.innerHTML = ""; // Clear the cart container before updating
-
-    // Loop through each item in the cart and display it with a remove button
+    cartContainer.innerHTML = "";
     cart.forEach((item, index) => {
         cartContainer.innerHTML += `
             <div class="cart-item">
                 <img src="${item.img}" alt="${item.name}" width="40" height="40">
                 <p>${item.name} - ${item.price}</p>
-                <button onclick="removeFromCart(${index})" style="color: pink;">Remove</button>
+                <button onclick="removeFromCart(${index})" style="color: pink;">Устгах</button>
             </div>
         `;
     });
 
-    // Show checkout button if there are items in the cart
     const checkoutButton = document.getElementById("checkout-button");
-    if (cart.length > 0) {
-        checkoutButton.style.display = "block";
-    } else {
-        checkoutButton.style.display = "none";
-    }
+    checkoutButton.style.display = cart.length > 0 ? "block" : "none";
+
+    // Сагсыг харагдуулна
+    document.getElementById("cart-dropdown").style.display = "block";
+}
+
+            document.getElementById("cart-dropdown").style.display = "block";
+
+            const cartCount = document.getElementById("cart-count");
+            cartCount.innerHTML = cart.length;
+
+            const cartContainer = document.getElementById("cart-container");
+            cartContainer.innerHTML = "";
+            cart.forEach((item, index) => {
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.name}" width="40" height="40">
+                        <p>${item.name} - ${item.price}</p>
+                        <button onclick="removeFromCart(${index})" style="color: pink;">Устгах</button>
+                    </div>
+                `;
+            });
+
+            const checkoutButton = document.getElementById("checkout-button");
+            checkoutButton.style.display = cart.length > 0 ? "block" : "none";
+
+            function toggleCart() {
+    const cartDropdown = document.getElementById("cart-dropdown");
+    cartDropdown.style.display = cartDropdown.style.display === "block" ? "none" : "block";
 }
 
 
-        // Toggle cart dropdown visibility
-        function toggleCart() {
-            const cartDropdown = document.getElementById("cart-dropdown");
-            cartDropdown.style.display = cartDropdown.style.display === "block" ? "none" : "block";
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
         }
 
-        // Update pagination links
-        function updatePagination() {
-            const totalPages = Math.ceil(products.length / itemsPerPage);
-            document.getElementById("page1").style.display = currentPage > 1 ? "inline" : "none";
-            document.getElementById("page2").style.display = currentPage < totalPages ? "inline" : "none";
-
-            const prevButton = document.getElementById("prev-button");
-            const nextButton = document.getElementById("next-button");
-
-            prevButton.style.visibility = currentPage === 1 ? "hidden" : "visible";
-            nextButton.style.visibility = currentPage === totalPages ? "hidden" : "visible";
+        // Нэвтрэх модал
+        function openLoginForm() {
+            document.getElementById("login-modal").style.display = "block";
+        }
+        function closeLoginForm() {
+            document.getElementById("login-modal").style.display = "none";
         }
 
-        // Pagination button actions
-        function changePage(direction) {
-            setPage(currentPage + direction);
+        // Бүртгэл модал
+        function openSignupForm() {
+            document.getElementById("signup-modal").style.display = "block";
+        }
+        function closeSignupForm() {
+            document.getElementById("signup-modal").style.display = "none";
         }
 
-        // Initial rendering
+        function loginUser(event) {
+            event.preventDefault();
+            alert("Нэвтрэх үйлдэл амжилттай боллоо!");
+            closeLoginForm();
+        }
+
+        function signupUser(event) {
+            event.preventDefault();
+            alert("Бүртгүүлэх үйлдэл амжилттай боллоо!");
+            closeSignupForm();
+        }
+
+        // Хуудасны эхэнд ачааллуулна
         renderProducts();
         updatePagination();
-    </script> 
-    
-</section>
-        </div>
-    <!-- </div> -->
+    </script>
+
+    <div class="bottom-nav">
+        <p> Онлайн Дэлгүүр </p>
+    </div>
+
 </body>
 </html>
