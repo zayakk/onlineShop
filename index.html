@@ -1,288 +1,195 @@
 <!DOCTYPE html>
-<html lang="mn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Онлайн Дэлгүүр</title>
-    <link rel="stylesheet" href="mystyle.css">
-    <style>
-        /* Таны стилүүдийг энд нэмнэ үү */
-    </style>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Online Shop</title>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="logo">ЛОГО</div>
-        <div class="search-bar"><input type="text" placeholder="Хайх..."></div>
-        <div class="login">
-            <a href="#" onclick="openLoginForm()" style="color: white;">Нэвтрэх</a>
-            <a href="#" onclick="openSignupForm()" style="color: white;">Бүртгэл</a>
+        <div>
+
+            <header class="top-bar">
+                <div class="logo">
+                    <div class="logo1">
+                        <img src="logo.jpg" alt="logo" width="80" height="50">
+                    </div>
+                    
+                    <div class="search-bar"><input type="text" placeholder="Search...">
+                    </div>
+                    <button 
+                    type="button" style="width:24px;height:24px; float:left; margin-top: 14px;" aria-hidden="true">
+                    </button>
+                    <a class="login"  href="#" style="color: white;">Login </a>
+                </div>
+                    
+                    <div class="menu-bar">
+                        <div class="dropdown">
+                            <a href="#">Category</a>
+                            <div class="dropdown-content">
+                                <a href="#">Men</a>
+                            <a href="#">Women</a>
+                            <a href="#">Kids</a>
+                            <a href="#">Accessories</a>
+                        </div>
+                    </div>
+                    <a href="#">New</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Sale</a>
+                    
+                    
+                    <!-- <!-  Cart icon and items count -->
+                    <div class="cart-icon" onclick="toggleCart()">
+                        🛒
+                    </div>
+                    <div class="cart-items" id="cart-count">0</div>
+                    
+                    <!-- <!- Cart dropdown -->
+                    <div class="cart-dropdown" id="cart-dropdown">
+                        <h3>Your Cart</h3>
+                        <div id="cart-container"></div>
+                        <a href="#" id="checkout-button" style="display: none;">Proceed to Checkout</a>
+                    </div> 
+                    
+                </div>
+            </header>
         </div>
-    </div>
+        <div>
 
-    <div class="menu-bar">
-        <div class="dropdown">
-            <a href="#" onclick="changeCategory('all')">Төрөл</a>
-            <div class="dropdown-content">
-                <a href="#" onclick="changeCategory('men')">Эрэгтэй</a>
-                <a href="#" onclick="changeCategory('women')">Эмэгтэй</a>
-                <a href="#" onclick="changeCategory('kids')">Хүүхдүүд</a>
-                <a href="#" onclick="changeCategory('accessories')">Аксессуар</a>
-            </div>
-        </div>
-        <a href="#">Шинэ</a>
-        <a href="#">Холбоо барих</a>
-        <a href="#">Хямдрал</a>
-    </div>
-
-    <div class="cart-icon" onclick="toggleCart()">
-        🛒
-    </div>
-    <div class="cart-items" id="cart-count">0</div>
-
-    <div class="cart-dropdown" id="cart-dropdown">
-        <h3>Таны Сагс</h3>
-        <div id="cart-container"></div>
-        <a href="#" id="checkout-button" style="display: none;">Төлбөр төлөх</a>
-    </div>
-
-    <div class="content">
-        <h2>Шинэ хувцаснуудыг худалдан аваарай</h2>
-        <p>Тухайн өдөр, үеийн хувцаснуудыг олоорой.</p>
-        <div class="card-container" id="product-container"></div>
-    </div>
-
-    
-
-    <div class="pagination">
-        <a href="#" id="prev-button" onclick="changePage(-1)">&laquo; Өмнөх</a>
+            <section>
+                <div class="content">
+                    <h2>Shop the Latest Clothes</h2>
+                    <p>Find the best outfits for any occasion.</p>
+                    <div class="card-container" id="product-container"></div>
+                </div>
+                
+                <div class="pagination">
+        <a href="#" id="prev-button" onclick="changePage(-1)">&laquo; Prev</a>
         <a href="#" id="page1" onclick="setPage(1)">1</a>
         <a href="#" id="page2" onclick="setPage(2)">2</a>
-        <a href="#" id="next-button" onclick="changePage(1)">Дараах &raquo;</a>
+        <a href="#" id="next-button" onclick="changePage(1)">Next &raquo;</a>
+    </div> 
+    
+    <div class="bottom-nav">
+        <p> Online Shop </p>
     </div>
 
-    <!-- Нэвтрэх модал -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeLoginForm()">&times;</span>
-            <form onsubmit="loginUser(event)">
-                <input type="text" id="login-username" placeholder="Нэвтрэх нэр">
-                <input type="password" id="login-password" placeholder="Нууц үг">
-                <button type="submit">Нэвтрэх</button>
-            </form>
-        </div>
-    </div>
 
-    <!-- Бүртгэл модал -->
-    <div id="signup-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeSignupForm()">&times;</span>
-            <form onsubmit="signupUser(event)">
-                <input type="text" id="signup-username" placeholder="Нэвтрэх нэр">
-                <input type="email" id="signup-email" placeholder="Цахим шуудан">
-                <input type="password" id="signup-password" placeholder="Нууц үг">
-                <button type="submit">Бүртгүүлэх</button>
-            </form>
-        </div>
-    </div>
 
-    <script>
-        let cart = [];
-        let currentCategory = 'all';
+<script>
+        const products = [
+            { img: "https://i.pinimg.com/originals/39/e9/f2/39e9f296aee0459bc17a5bdecb0e7230.jpg", name: "Trendy Outfit", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/b9/bc/ea/b9bceaf0ae06fbaf399aa7d7989c27b0.jpg", name: "Casual Wear", price: "$150.000₮" },
+            { img: "https://i.pinimg.com/736x/4f/a0/c3/4fa0c395efd7db0a3eac7792d348e002.jpg", name: "Summer Dress", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/15/c1/d9/15c1d98ab9389d98b264c98974b4d820.jpg", name: "Trendy Outfit", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Wear", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/ba/86/7b/ba867b94aa8438d30d934173fd0ba194.jpg", name: "Casual Man Wear", price: "150.000₮" },
+            { img: "https://i.pinimg.com/736x/d4/9a/1c/d49a1c0203c92b42d9f1cd799903d270.jpg", name: "Casual Man Wear", price: "150.000₮" },
+        ];
+
         let currentPage = 1;
         const itemsPerPage = 5;
+        let cart = [];
 
-        const allProducts = {
-            men: [
-                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
-                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
-                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },],
-            women: [
-                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
-                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
-                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },],
-            kids: [
-                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
-                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
-                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },],
-            accessories: [
-                { img: "https://i.pinimg.com/736x/9d/f2/d1/9df2d1a2e7c33db498e535399dac8e33.jpg", name: "Эрэгтэй хувцас 1", price: "150.000₮" ,discountedPrice: "120.000₮" },
-                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 2", price: "150.000₮" },
-                { img: "https://i.pinimg.com/736x/2d/b1/0c/2db10cdf77cc3474eabf5ab7dbddf177.jpg", name: "Эрэгтэй хувцас 3", price: "150.000₮" },],
-        };
-
-        // Бүх барааг автоматаар all ангилалд нэгтгэн хадгалах
-        allProducts.all = [].concat(...Object.values(allProducts));
-
-
-        // Хуудас эхлэхэд бүх барааг харуулах
-        document.addEventListener("DOMContentLoaded", function () {
-            currentCategory = "all";
-            setPage(1);
-        });
-
-
-
-        function changeCategory(category) {
-            currentCategory = category;
-            setPage(1);
-        }
-
+        // Set page number
         function setPage(page) {
             if (page < 1) return;
-            const totalPages = Math.ceil(allProducts[currentCategory].length / itemsPerPage);
+            const totalPages = Math.ceil(products.length / itemsPerPage);
             if (page > totalPages) return;
             currentPage = page;
             renderProducts();
             updatePagination();
         }
 
+        // Render the products based on the current page
         function renderProducts() {
             const container = document.getElementById("product-container");
             container.innerHTML = "";
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
-            const products = allProducts[currentCategory].slice(start, end);
-
-            products.forEach(product => {
-                let priceDisplay = `<p class='price'>${product.price}</p>`;
-                if (product.discountedPrice) {
-                    priceDisplay = `
-                        <p class='price' style="text-decoration: line-through;">${product.price}</p>
-                        <p class='discounted-price'>${product.discountedPrice}</p>
-                    `;
-                }
+            products.slice(start, end).forEach(product => {
                 container.innerHTML += `<div class='card'>
                     <img src='${product.img}' alt='${product.name}'>
                     <p>${product.name}</p>
-                    ${priceDisplay}
-                    <button style="color: pink" onclick="addToCart('${product.name}', '${product.discountedPrice || product.price}', '${product.img}')">Сагсанд хийх</button>
+                    <p class='price'>${product.price}</p>
+                    <button style=color.pink onclick="addToCart('${product.name}', '${product.price}', '${product.img}')"> Сагсанд хийх </button>
                 </div>`;
             });
         }
 
-        function updatePagination() {
-            const totalPages = Math.ceil(allProducts[currentCategory].length / itemsPerPage);
-            const pagination = document.querySelector(".pagination");
+        // Add product to cart
+function addToCart(name, price, img) {
+    cart.push({ name, price, img });
+    updateCart();
+}
 
-            if (totalPages <= 1) {
-                pagination.style.display = "none";
-            } else {
-                pagination.style.display = "block";
-            }
+// Remove product from cart
+function removeFromCart(index) {
+    cart.splice(index, 1); // Remove the item at the specified index
+    updateCart(); // Update the cart UI after removal
+}
 
-            document.getElementById("prev-button").style.visibility = currentPage === 1 ? "hidden" : "visible";
-            document.getElementById("next-button").style.visibility = currentPage === totalPages ? "hidden" : "visible";
-        }
-
-        function changePage(step) {
-            const totalPages = Math.ceil(allProducts[currentCategory].length / itemsPerPage);
-            let newPage = currentPage + step;
-
-            if (newPage < 1 || newPage > totalPages) return; // Хязгаар шалгах
-
-            currentPage = newPage;
-            renderProducts(); // Бүтээгдэхүүнийг шинэчилж харуулах
-            updatePagination(); // Хуудаслалтыг шинэчлэх
-        }
-
-
-
-        function addToCart(name, price, img) {
-            cart.push({ name, price, img });
-            updateCart();
-        }
-
-        function updateCart() {
+// Update cart UI and item count
+function updateCart() {
     const cartCount = document.getElementById("cart-count");
     cartCount.innerHTML = cart.length;
 
     const cartContainer = document.getElementById("cart-container");
-    cartContainer.innerHTML = "";
+    cartContainer.innerHTML = ""; // Clear the cart container before updating
+
+    // Loop through each item in the cart and display it with a remove button
     cart.forEach((item, index) => {
         cartContainer.innerHTML += `
             <div class="cart-item">
                 <img src="${item.img}" alt="${item.name}" width="40" height="40">
                 <p>${item.name} - ${item.price}</p>
-                <button onclick="removeFromCart(${index})" style="color: pink;">Устгах</button>
+                <button onclick="removeFromCart(${index})" style="color: pink;">Remove</button>
             </div>
         `;
     });
 
+    // Show checkout button if there are items in the cart
     const checkoutButton = document.getElementById("checkout-button");
-    checkoutButton.style.display = cart.length > 0 ? "block" : "none";
-
-    // Сагсыг харагдуулна
-    document.getElementById("cart-dropdown").style.display = "block";
-}
-
-            document.getElementById("cart-dropdown").style.display = "block";
-
-            const cartCount = document.getElementById("cart-count");
-            cartCount.innerHTML = cart.length;
-
-            const cartContainer = document.getElementById("cart-container");
-            cartContainer.innerHTML = "";
-            cart.forEach((item, index) => {
-                cartContainer.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${item.img}" alt="${item.name}" width="40" height="40">
-                        <p>${item.name} - ${item.price}</p>
-                        <button onclick="removeFromCart(${index})" style="color: pink;">Устгах</button>
-                    </div>
-                `;
-            });
-
-            const checkoutButton = document.getElementById("checkout-button");
-            checkoutButton.style.display = cart.length > 0 ? "block" : "none";
-
-            function toggleCart() {
-    const cartDropdown = document.getElementById("cart-dropdown");
-    cartDropdown.style.display = cartDropdown.style.display === "block" ? "none" : "block";
+    if (cart.length > 0) {
+        checkoutButton.style.display = "block";
+    } else {
+        checkoutButton.style.display = "none";
+    }
 }
 
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
+        // Toggle cart dropdown visibility
+        function toggleCart() {
+            const cartDropdown = document.getElementById("cart-dropdown");
+            cartDropdown.style.display = cartDropdown.style.display === "block" ? "none" : "block";
         }
 
-        // Нэвтрэх модал
-        function openLoginForm() {
-            document.getElementById("login-modal").style.display = "block";
-        }
-        function closeLoginForm() {
-            document.getElementById("login-modal").style.display = "none";
+        // Update pagination links
+        function updatePagination() {
+            const totalPages = Math.ceil(products.length / itemsPerPage);
+            document.getElementById("page1").style.display = currentPage > 1 ? "inline" : "none";
+            document.getElementById("page2").style.display = currentPage < totalPages ? "inline" : "none";
+
+            const prevButton = document.getElementById("prev-button");
+            const nextButton = document.getElementById("next-button");
+
+            prevButton.style.visibility = currentPage === 1 ? "hidden" : "visible";
+            nextButton.style.visibility = currentPage === totalPages ? "hidden" : "visible";
         }
 
-        // Бүртгэл модал
-        function openSignupForm() {
-            document.getElementById("signup-modal").style.display = "block";
-        }
-        function closeSignupForm() {
-            document.getElementById("signup-modal").style.display = "none";
+        // Pagination button actions
+        function changePage(direction) {
+            setPage(currentPage + direction);
         }
 
-        function loginUser(event) {
-            event.preventDefault();
-            alert("Нэвтрэх үйлдэл амжилттай боллоо!");
-            closeLoginForm();
-        }
-
-        function signupUser(event) {
-            event.preventDefault();
-            alert("Бүртгүүлэх үйлдэл амжилттай боллоо!");
-            closeSignupForm();
-        }
-
-        // Хуудасны эхэнд ачааллуулна
+        // Initial rendering
         renderProducts();
         updatePagination();
-    </script>
-
-    <div class="bottom-nav">
-        <p> Онлайн Дэлгүүр </p>
-    </div>
-
+    </script> 
+    
+</section>
+        </div>
+    <!-- </div> -->
 </body>
 </html>
